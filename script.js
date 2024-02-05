@@ -1,24 +1,35 @@
 document.querySelector("nav").addEventListener("click", (e) => {
   if (e.target.nodeName != "I") return;
-  console.log(e.target);
   let data;
   switch (e.target.getAttributeNode("item-id").value) {
     case "home":
       data = { title: "home", color: "red", itemId: "home" };
       update(data);
+      history.pushState(data, "home", "home");
       break;
     case "search":
       data = { title: "search", color: "blue", itemId: "search" };
       update(data);
+      history.pushState(data, "search", "search");
       break;
     case "likes":
       data = { title: "likes", color: "green", itemId: "likes" };
       update(data);
+      history.pushState(data, "likes", "likes");
       break;
     case "profile":
       data = { title: "profile", color: "pink", itemId: "profile" };
       update(data);
+      history.pushState(data, "profile", "profile");
       break;
+  }
+});
+
+window.addEventListener("popstate", (e) => {
+  if (history.state) {
+    update(history.state);
+  } else {
+    update({ title: "home", color: "red", itemId: "home" });
   }
 });
 
